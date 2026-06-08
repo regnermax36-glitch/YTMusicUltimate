@@ -40,6 +40,18 @@
 "AUTO_REMIX" = "Auto Remix";
 "AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
 
+"REMIX_SETTINGS" = "Remix Settings";
+"REMIX_SETTINGS_FOOTER" = "Settings take effect on the next song. Club adds bass and reverb; Lo-Fi applies vintage filtering and pitch wobble; Studio adds a bright room reverb with compression.";
+"REMIX_MODE" = "Mode";
+"REMIX_CLUB" = "Club";
+"REMIX_LOFI" = "Lo-Fi";
+"REMIX_STUDIO" = "Studio";
+"REMIX_INTENSITY" = "Intensity";
+"REMIX_LIGHT" = "Light";
+"REMIX_MODERATE" = "Moderate";
+"REMIX_HEAVY" = "Heavy";
+"REMIX_MAX" = "Maximum";
+
 "SEEK_BUTTONS" = "將「下一首/上一首」替換為「快轉/倒轉」按鈕";
 "SEEK_TIME_FOOTER" = "選擇一個「快轉/倒轉」時間/秒\n\n預設:\n倒轉 = 10秒\n快轉 = 30秒\n\n長按按鈕可跳到「下一首/上一首」曲目";
 "DEFAULT" = "預設";

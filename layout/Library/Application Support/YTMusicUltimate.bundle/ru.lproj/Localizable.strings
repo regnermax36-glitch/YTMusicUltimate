@@ -40,6 +40,18 @@
 "AUTO_REMIX" = "Auto Remix";
 "AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
 
+"REMIX_SETTINGS" = "Remix Settings";
+"REMIX_SETTINGS_FOOTER" = "Settings take effect on the next song. Club adds bass and reverb; Lo-Fi applies vintage filtering and pitch wobble; Studio adds a bright room reverb with compression.";
+"REMIX_MODE" = "Mode";
+"REMIX_CLUB" = "Club";
+"REMIX_LOFI" = "Lo-Fi";
+"REMIX_STUDIO" = "Studio";
+"REMIX_INTENSITY" = "Intensity";
+"REMIX_LIGHT" = "Light";
+"REMIX_MODERATE" = "Moderate";
+"REMIX_HEAVY" = "Heavy";
+"REMIX_MAX" = "Maximum";
+
 "SEEK_BUTTONS" = "Заменить «След.» и «Пред.» на кнопки перемотки";
 "SEEK_TIME_FOOTER" = "Выберите время перемотки в секундах\n\nПо умолчанию:\nПеремотка назад = 10cек.\nПеремотка вперед = 30cек.\n\nПереходить к следующему и предыдущему трекам можно долгим нажатием по кнопкам.";
 "DEFAULT" = "По умолч.";

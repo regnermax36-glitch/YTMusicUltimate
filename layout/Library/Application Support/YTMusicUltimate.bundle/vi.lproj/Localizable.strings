@@ -40,6 +40,18 @@
 "AUTO_REMIX" = "Auto Remix";
 "AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
 
+"REMIX_SETTINGS" = "Remix Settings";
+"REMIX_SETTINGS_FOOTER" = "Settings take effect on the next song. Club adds bass and reverb; Lo-Fi applies vintage filtering and pitch wobble; Studio adds a bright room reverb with compression.";
+"REMIX_MODE" = "Mode";
+"REMIX_CLUB" = "Club";
+"REMIX_LOFI" = "Lo-Fi";
+"REMIX_STUDIO" = "Studio";
+"REMIX_INTENSITY" = "Intensity";
+"REMIX_LIGHT" = "Light";
+"REMIX_MODERATE" = "Moderate";
+"REMIX_HEAVY" = "Heavy";
+"REMIX_MAX" = "Maximum";
+
 "SEEK_BUTTONS" = "Thay thế nút trước hoặc tiếp theo bằng nút tua nhạc";
 "SEEK_TIME_FOOTER" = "Chọn thời lượng tua theo đơn vị giây\n\nMặc định:\nTua lại = 10 giây.\nTua đi = 30 giây.\n\nBạn có thể nhấn giữ nút tua đế chuyển đến bản nhạc trước hoặc tiếp theo tương ứng.";
 "DEFAULT" = "Mặc định";

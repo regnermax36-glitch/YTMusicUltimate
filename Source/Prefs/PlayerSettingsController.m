@@ -26,7 +26,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -36,14 +36,26 @@
         return 3;
     } if (section == 3) {
         return 2;
+    } if (section == 4) {
+        return 2;
     } else {
         return 1;
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 4) {
+        return LOC(@"REMIX_SETTINGS");
+    }
+    return nil;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
         return LOC(@"SEEK_TIME_FOOTER");
+    }
+    if (section == 4) {
+        return LOC(@"REMIX_SETTINGS_FOOTER");
     }
 
     return nil;
@@ -197,6 +209,41 @@
         }
     }
 
+    if (indexPath.section == 4) {
+        if (indexPath.row == 0) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"remixModeCell"];
+            cell.textLabel.text = LOC(@"REMIX_MODE");
+
+            UISegmentedControl *ctrl = [[UISegmentedControl alloc] initWithItems:@[
+                LOC(@"REMIX_CLUB"), LOC(@"REMIX_LOFI"), LOC(@"REMIX_STUDIO")
+            ]];
+            ctrl.selectedSegmentIndex = [YTMUltimateDict[@"remixMode"] integerValue];
+            [ctrl addTarget:self action:@selector(remixModeSelect:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = ctrl;
+
+            return cell;
+        }
+
+        if (indexPath.row == 1) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"remixIntensityCell"];
+            cell.textLabel.text = LOC(@"REMIX_INTENSITY");
+
+            UISegmentedControl *ctrl = [[UISegmentedControl alloc] initWithItems:@[
+                LOC(@"REMIX_LIGHT"), LOC(@"REMIX_MODERATE"), LOC(@"REMIX_HEAVY"), LOC(@"REMIX_MAX")
+            ]];
+            ctrl.selectedSegmentIndex = [YTMUltimateDict[@"remixIntensity"] integerValue];
+            [ctrl addTarget:self action:@selector(remixIntensitySelect:) forControlEvents:UIControlEventValueChanged];
+
+            [cell.contentView addSubview:ctrl];
+            ctrl.translatesAutoresizingMaskIntoConstraints = NO;
+            [ctrl.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor].active = YES;
+            [ctrl.leadingAnchor constraintEqualToAnchor:cell.contentView.leadingAnchor constant:5.0].active = YES;
+            [ctrl.trailingAnchor constraintEqualToAnchor:cell.contentView.trailingAnchor constant:-5.0].active = YES;
+
+            return cell;
+        }
+    }
+
     return cell;
 }
 
@@ -261,6 +308,22 @@
     NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"YTMUltimate"]];
 
     [YTMUltimateDict setObject:@(sender.selectedSegmentIndex) forKey:@"seekTime"];
+    [defaults setObject:YTMUltimateDict forKey:@"YTMUltimate"];
+}
+
+- (void)remixModeSelect:(UISegmentedControl *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"YTMUltimate"]];
+
+    [YTMUltimateDict setObject:@(sender.selectedSegmentIndex) forKey:@"remixMode"];
+    [defaults setObject:YTMUltimateDict forKey:@"YTMUltimate"];
+}
+
+- (void)remixIntensitySelect:(UISegmentedControl *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"YTMUltimate"]];
+
+    [YTMUltimateDict setObject:@(sender.selectedSegmentIndex) forKey:@"remixIntensity"];
     [defaults setObject:YTMUltimateDict forKey:@"YTMUltimate"];
 }
 
