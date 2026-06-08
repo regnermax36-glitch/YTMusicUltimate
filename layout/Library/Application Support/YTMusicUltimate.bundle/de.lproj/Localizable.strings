@@ -37,6 +37,9 @@
 "SB_ASK" = "Fragen";
 "SB_NOTIF_DURATION" = "Benachrichtigungsdauer (Sek.)";
 
+"AUTO_REMIX" = "Auto Remix";
+"AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
+
 "SEEK_BUTTONS" = "Vor/Zurück-Buttons durch Vor- und Rückspul-Buttons ersetzen";
 "SEEK_TIME_FOOTER" = "Sprungzeit in Sekunden festlegen\n\nStandardwerte:\nRückwärts springen = 10 Sek.\nVorwärts springen = 30 Sek.\n\nZum nächsten bzw. vorherigen Titel springen durch langes Drücken der Buttons.";
 "DEFAULT" = "Standard";

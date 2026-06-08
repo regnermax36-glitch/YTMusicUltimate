@@ -37,6 +37,9 @@
 "SB_ASK" = "Zapytaj";
 "SB_NOTIF_DURATION" = "Czas powiadomienia (sek.)";
 
+"AUTO_REMIX" = "Auto Remix";
+"AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
+
 "SEEK_BUTTONS" = "Zamień przyciski następny/poprzedni na do przodu/do tyłu";
 "SEEK_TIME_FOOTER" = "Wybierz czas przewijania w sekundach\n\Domyślnie:\nW tył = 10 sek.\nW przód = 30 sek.\n\nPomijanie utworów do przodu/tyłu jest możliwe przy dłuższym przytrzymaniu przycisku przewijania.";
 "DEFAULT" = "Domyślnie";

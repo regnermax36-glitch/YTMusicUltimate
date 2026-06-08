@@ -37,6 +37,9 @@
 "SB_ASK" = "Hỏi";
 "SB_NOTIF_DURATION" = "Thời lượng thông báo (giây)";
 
+"AUTO_REMIX" = "Auto Remix";
+"AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
+
 "SEEK_BUTTONS" = "Thay thế nút trước hoặc tiếp theo bằng nút tua nhạc";
 "SEEK_TIME_FOOTER" = "Chọn thời lượng tua theo đơn vị giây\n\nMặc định:\nTua lại = 10 giây.\nTua đi = 30 giây.\n\nBạn có thể nhấn giữ nút tua đế chuyển đến bản nhạc trước hoặc tiếp theo tương ứng.";
 "DEFAULT" = "Mặc định";

@@ -37,6 +37,9 @@
 "SB_ASK" = "ถามก่อน";
 "SB_NOTIF_DURATION" = "ระยะเวลาแจ้งเตือน (วินาที)";
 
+"AUTO_REMIX" = "Auto Remix";
+"AUTO_REMIX_DESC" = "Automatically applies remix effects (reverb, warmth) to songs as they play";
+
 "SEEK_BUTTONS" = "แทนที่ปุ่มถัดไป/ก่อนหน้า ด้วยปุ่มกรอไปข้างหน้าและย้อนกลับ";
 "SEEK_TIME_FOOTER" = "เลือกเวลาการกรอเป็นวินาที\n\nค่าเริ่มต้น:\nย้อนกลับ = 10 วินาที\nกรอไปข้างหน้า = 30 วินาที\n\nสามารถข้ามไปเพลงถัดไปหรือก่อนหน้าได้โดยกดค้างที่ปุ่ม";
 "DEFAULT" = "ค่าเริ่มต้น";
