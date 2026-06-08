@@ -28,7 +28,7 @@ jobs:
           path: main
           submodules: recursive
       - name: Install Dependencies
-        run: brew install make
+        run: brew install make ldid
       - name: Set PATH environment variables
         run: |
           echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
@@ -66,7 +66,7 @@ jobs:
           make clean package DEBUG=0 FINALPACKAGE=1 SIDELOADING=1
           mv packages/*.deb ../ytmult.deb
       - name: Inject tweak into rootless IPA
-        run: cyan -i main/ytm.ipa -o YTMusicUltimate.ipa -uwsf ytmult.deb -n "${{ inputs.display_name }}" -b ${{ inputs.bundle_id }}
+        run: cyan -i main/ytm.ipa -o YTMusicUltimate.ipa -wsf ytmult.deb -n "${{ inputs.display_name }}" -b ${{ inputs.bundle_id }}
       - name: Upload IPA as Artifact
         uses: actions/upload-artifact@v4
         with:
