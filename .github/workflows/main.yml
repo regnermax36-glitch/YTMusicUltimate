@@ -1,67 +1,75 @@
-name: main iOS CI
-
+name: Build YTMusicUltimate
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+  workflow_dispatch:
+    inputs:
+      display_name:
+        description: "App Name (Optional)"
+        default: "YouTube Music"
+        required: true
+        type: string
+      bundle_id:
+        description: "BundleID (Optional)"
+        default: "com.google.ios.youtubemusic"
+        required: true
+        type: string
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
-    name: Build Unsigned IPA
+    name: Build YTMusicUltimate
     runs-on: macos-latest
-
+    permissions:
+      contents: write
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
-    - name: Set up Xcode
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: latest-stable
-
-    - name: Cache Swift Packages
-      uses: actions/cache@v3
-      with:
-        path: .build
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-        restore-keys: |
-          ${{ runner.os }}-spm-
-
-    - name: Install XcodeGen
-      run: brew install xcodegen
-
-    - name: Generate Xcode Project
-      run: xcodegen generate --spec project.yml
-
-    - name: Build and Package IPA
-      run: |
-        xcodebuild -project MaxRegneros.xcodeproj \
-                   -scheme MaxRegneros \
-                   -destination 'generic/platform=iOS' \
-                   -configuration Release \
-                   -derivedDataPath ${{ github.workspace }}/build/derived \
-                   CODE_SIGN_IDENTITY="" \
-                   CODE_SIGNING_REQUIRED=NO \
-                   CODE_SIGNING_ALLOWED=NO \
-                   build
-
-        APP=$(find "${{ github.workspace }}/build/derived/Build/Products" \
-          -name "*.app" -type d \
-          -not -path "*Test*" \
-          -not -path "*PlugIns*" \
-          | head -1)
-
-        echo "Found: $APP"
-        mkdir -p "${{ github.workspace }}/build/ipa/Payload"
-        cp -r "$APP" "${{ github.workspace }}/build/ipa/Payload/"
-        cd "${{ github.workspace }}/build/ipa"
-        zip -r MaxRegneros.ipa Payload/
-        echo "IPA_PATH=${{ github.workspace }}/build/ipa/MaxRegneros.ipa" >> $GITHUB_ENV
-
-    - name: Upload IPA Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: MaxRegneros-${{ github.run_number }}
-        path: ${{ env.IPA_PATH }}
-        retention-days: 14
+      - name: Checkout Main
+        uses: actions/checkout@v4
+        with:
+          path: main
+          submodules: recursive
+      - name: Install Dependencies
+        run: brew install make ldid
+      - name: Set PATH environment variables
+        run: |
+          echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+          echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
+      - name: Cache Theos
+        id: theos
+        uses: actions/cache@v4
+        env:
+          cache-name: theos_cache_344ee59
+        with:
+          path: theos/
+          key: ${{ env.cache-name }}
+          restore-keys: ${{ env.cache-name }}
+      - name: Setup Theos
+        if: steps.theos.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: theos/theos
+          ref: 344ee5925df036dbd1312b783ad5a00d153c2445
+          path: theos
+          submodules: recursive
+      - name: Download iOS SDK
+        if: steps.theos.outputs.cache-hit != 'true'
+        run: |
+          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/theos/sdks.git
+          cd sdks
+          git sparse-checkout set --no-cone iPhoneOS16.5.sdk
+          git checkout
+          mv *.sdk $THEOS/sdks
+      - name: Install cyan
+        run: pipx install --force https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
+      - name: Build Tweak for Sideloading
+        run: |
+          cd main
+          make clean package DEBUG=0 FINALPACKAGE=1 SIDELOADING=1
+          mv packages/*.deb ../ytmult.deb
+      - name: Inject tweak into rootless IPA
+        run: cyan -i main/ytm.ipa -o YTMusicUltimate.ipa -uwsf ytmult.deb -n "${{ inputs.display_name }}" -b ${{ inputs.bundle_id }}
+      - name: Upload IPA as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: YTMusicUltimate-${{ github.run_number }}
+          path: YTMusicUltimate.ipa
+          retention-days: 30
